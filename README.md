@@ -4,13 +4,15 @@
 
 - Clone django-restapi-docker project.
 - Turn on Docker on your local machine.
-- Run command `docker build .`.
-- Run command `docker-compose build`.
-- Run command `docker-compose up` and open browser at `localhost:8000`.
+- Run command 
+`$ docker build .`
+`$ docker-compose build`
+`$ docker-compose up` 
 
 ## Testing
 
-- Run command `docker-compose run --rm app sh -c "python manage.py test && flake8"`
+- Run command 
+`$ docker-compose run --rm app sh -c "python manage.py test && flake8"`
 
 ## API endpoints
 
@@ -18,5 +20,5 @@
 - `/api/user/create`
 - `/api/user/token`
 - `/api/user/me`
-...
+- ...
 
