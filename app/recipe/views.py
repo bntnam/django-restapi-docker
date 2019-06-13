@@ -18,7 +18,9 @@ class BaseRecipeAttrViewSet(viewsets.GenericViewSet,
 
     def get_queryset(self):
         """Return objects for the current authenticated user only"""
-        assigned_only = bool(self.request.query_params.set('assigned_only'))
+        assigned_only = bool(
+            int(self.request.query_params.get('assigned_only', 0))
+        )
         queryset = self.queryset
         if assigned_only:
             queryset = queryset.filter(recipe__isnull=False)
@@ -80,7 +82,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         """Create a new recipe"""
         serializer.save(user=self.request.user)
 
-    @action(method=['POST'], detail=True, url_path='upload-image')
+    @action(methods=['POST'], detail=True, url_path='upload-image')
     def upload_image(self, request, pk=None):
         """Upload an image to a recipe"""
         recipe = self.get_object()

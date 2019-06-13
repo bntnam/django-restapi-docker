@@ -4,7 +4,7 @@
 
 - Clone django-restapi-docker project.
 - Turn on Docker on your local machine.
-- Run command
+- Run command:
 ```
 $ docker-compose build
 ```
@@ -15,7 +15,7 @@ $ docker-compose up
 
 ## Testing
 
-- Run command
+- Run command:
 ```
 $ docker-compose run --rm app sh -c "python manage.py test && flake8"
 ```
@@ -26,5 +26,8 @@ $ docker-compose run --rm app sh -c "python manage.py test && flake8"
 - `/api/user/create`
 - `/api/user/token`
 - `/api/user/me`
-- ...
-
+- `/api/recipe/tags`
+- `/api/recipe/ingredients`
+- `/api/recipe/recipes`
+- `/api/recipe/recipes/{recipe_id}`
+- `/api/recipe/recipes/{recipe_id}/upload-image`

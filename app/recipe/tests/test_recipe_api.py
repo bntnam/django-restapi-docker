@@ -154,7 +154,7 @@ class PrivateRecipeApiTests(TestCase):
         ingredient2 = sample_ingredient(user=self.user, name='Ginger')
         payload = {
             'title': 'Thai prawn red curry',
-            'ingredient': [ingredient1.id, ingredient2.id],
+            'ingredients': [ingredient1.id, ingredient2.id],
             'time_minutes': 20,
             'price': 7.00
         }
@@ -177,7 +177,7 @@ class PrivateRecipeApiTests(TestCase):
         url = detail_url(recipe.id)
         self.client.patch(url, payload)
 
-        recipe.refesh_from_db()
+        recipe.refresh_from_db()
         self.assertEqual(recipe.title, payload['title'])
         tags = recipe.tags.all()
         self.assertEqual(len(tags), 1)
@@ -195,7 +195,7 @@ class PrivateRecipeApiTests(TestCase):
         url = detail_url(recipe.id)
         self.client.put(url, payload)
 
-        recipe.refesh_from_db()
+        recipe.refresh_from_db()
         self.assertEqual(recipe.title, payload['title'])
         self.assertEqual(recipe.time_minutes, payload['time_minutes'])
         self.assertEqual(recipe.price, payload['price'])
@@ -221,7 +221,7 @@ class RecipeImageUploadTests(TestCase):
         """Test uploading an image to recipe"""
         url = image_upload_url(self.recipe.id)
         with tempfile.NamedTemporaryFile(suffix='.jpg') as ntf:
-            img = Image.new['RGB', (10, 10)]
+            img = Image.new('RGB', (10, 10))
             img.save(ntf, format='JPEG')
             ntf.seek(0)
             res = self.client.post(url, {'image': ntf}, format='multipart')
